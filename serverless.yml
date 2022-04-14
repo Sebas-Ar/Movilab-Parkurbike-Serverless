@@ -1,5 +1,5 @@
 # NOTE: update this with your service name
-service: notes-api
+service: movilab
 
 # Create an optimized package for our functions 
 package:
@@ -12,7 +12,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: dev
   region: us-east-1
   # To load environment variables externally
@@ -22,8 +22,37 @@ provider:
   #
   #environment:
   #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
+  environment:
+    tableUsers: users
+    tablePark: biciparqueadero
 
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 functions:
+
+  createUser:
+    handler: createUser.main
+    events:
+      - http:
+          path: users
+          method: post
+
+  createPark:
+    handler: createPark.main
+    events:
+      - http:
+          path: park
+          method: post
+
   hello:
     handler: handler.hello
     events:

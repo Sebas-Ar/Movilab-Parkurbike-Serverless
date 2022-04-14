@@ -1,0 +1,3 @@
+{
+    "body":"{\"name\":\"ParqueaderoUSTA\",\"location\":\"Chapinero\",\"contact\":{\"email\":\"1234\"},\"type\":\"oro\",\"totalRacks\":\"100\",\"freeRacks\":\"90\",\"typeRack\":\"gancho\",\"photo\":\"USTA.jpg\",\"score\":\"5\",\"price\":\"10$\",\"offer\":\"10%\",\"services\":[\"gualla\"]}"
+}
